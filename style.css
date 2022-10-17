@@ -1,7 +1,6 @@
 :root {
   --page-background-color: #080;
   --page-navbar-color: #880;
-
   --desktop-textbox-color: #fff;
   --tablet-textbox-color: #c83737;
   --mobile-textbox-color: #00f;
@@ -9,14 +8,15 @@
   --circle-color: #088;
   --stripe-color: #00f;
 
-  --square-width: 120px;
-  --square-height: 120px;
+  --square-side-size: 120px;
+  --square-side-max-size: 200px;
   --stripe-width: 135px;
+  --stripe-min-width: 70px;
   --stripe-max-width: 175px;
   --stripe-height: 30px;
   --stripe-tablet-height: 25px;
-  --circle-width: 120px;
-  --circle-height: 110px;
+  --circle-side-size: 120px;
+  --circle-side-min-size: 90px;
   --textbox-width: 245px;
   --textbox-max-width: 315px;
   --textbox-mobile-width: 200px;
@@ -33,21 +33,16 @@ body {
   height: 100%;
   margin: 0;
 }
-
-.page-wrapper {
+.page-wrapper,
+.main-section {
   height: 100%;
   display: flex;
   flex-direction: column;
 }
-
 body {
-  border: var(--border-style-defined);
-  box-sizing: border-box;
-
   margin: 0;
   background-color: var(--page-background-color);
 }
-
 nav {
   background-color: var(--page-navbar-color);
   border-bottom: var(--border-style-defined);
@@ -55,12 +50,6 @@ nav {
   grid-area: nav;
   flex-shrink: 0;
 }
-.main-section {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
 .square-elements {
   padding: 40px 40px;
   display: grid;
@@ -70,111 +59,94 @@ nav {
     ". first-square"
     "second-square .";
 }
-
 .stripe-circle-elements {
+  padding-left: 20px;
+  padding-top: 20px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 100px 100px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   grid-template-areas:
     "first-stripe circle"
     "second-stripe circle";
   align-self: start;
-  padding-left: 20px;
-  padding-top: 20px;
-  flex-grow: 0;
   justify-self: stretch;
-  flex-shrink: 1;
-  grid-template-rows: 1fr 1fr;
+  flex: 0 1;
 }
-
 .stripe-circle-elements,
-.default-article,
+.textbox,
 .square-elements {
   animation: scale-in-top 1.5s cubic-bezier(0.265, 0.24, 0.74, 1) both;
 }
-
-.default-article {
+.textbox,
+.square,
+.stripe,
+body {
+  box-sizing: border-box;
+  border: var(--border-style-defined);
+}
+.textbox {
   background-color: var(--mobile-textbox-color);
+  width: var(--textbox-mobile-width);
   margin: 20px 40px;
   flex: 1 1;
   justify-self: start;
-  width: var(--textbox-mobile-width);
-  border: var(--border-style-defined);
-  box-sizing: border-box;
 }
-
 .square {
-  min-width: var(--square-width);
-  min-height: var(--square-height);
-  width: 100%;
-  padding-bottom: 100%;
-  max-height: 200px;
-  max-width: 200px;
   background-color: var(--square-color);
-  border: var(--border-style-defined);
+  min-width: var(--square-side-size);
+  min-height: var(--square-side-size);
+  max-height: var(--square-side-max-size);
+  max-width: var(--square-side-max-size);
+  padding-bottom: 100%;
   transform: rotate(45deg);
   margin: 0;
-  box-sizing: border-box;
 }
-
 .square::after {
   width: 100%;
   display: block;
   padding-top: 100%;
 }
-
 .square:first-child {
   grid-area: first-square;
-  justify-self: center;
-  align-self: center;
 }
 .square:nth-child(2) {
   grid-area: second-square;
+}
+.square:first-child,
+.square:nth-child(2) {
   justify-self: center;
   align-self: center;
 }
-
 .stripe {
-  width: 100%;
-  height: 20px;
   background-color: var(--stripe-color);
-  border: var(--border-style-defined);
-  min-width: 70px;
+  width: 100%;
+  min-width: var(--stripe-min-width);
   max-width: var(--stripe-max-width);
-  box-sizing: border-box;
+  height: 20px;
 }
-
 .stripe:first-child {
-  margin-right: 0;
   align-self: end;
-  justify-self: end;
 }
-
+.stripe:nth-child(2) {
+  align-self: start;
+}
+.stripe:first-child,
 .stripe:nth-child(2) {
   margin-right: 0;
-  align-self: start;
   justify-self: end;
 }
-
 .circle {
-  margin: 0 0 0 20px;
-  padding: 0;
-
   background-color: var(--circle-color);
-  height: 20px;
-  width: 20px;
+  margin: 0 20px;
+  padding: 0;
   border-radius: 50%;
   border: var(--border-style-defined);
-
   grid-area: circle;
   place-self: center start;
-  /* max-height: 70%; */
-  /* max-width: 70%; */
-  min-height: 90px;
-  min-width: 90px;
+  min-height: var(--circle-side-min-size);
+  min-width: var(--circle-side-min-size);
 }
-
-.default-article header {
+.textbox header {
   text-align: center;
   font-size: 3em;
   font-family: Arial, Helvetica, sans-serif;
@@ -182,14 +154,6 @@ nav {
 }
 
 @media all and (min-width: 583px) {
-  .default-article {
-    background-color: var(--tablet-textbox-color);
-    grid-area: textbox;
-    justify-self: end;
-    min-width: var(--textbox-tablet-width);
-    max-width: var(--textbox-tablet-max-width);
-    transition: all ease-in-out 1.5s;
-  }
   .main-section {
     height: 100%;
     display: grid;
@@ -206,9 +170,16 @@ nav {
     align-self: end;
     padding-bottom: 40px;
   }
-
+  .textbox {
+    background-color: var(--tablet-textbox-color);
+    grid-area: textbox;
+    justify-self: end;
+    min-width: var(--textbox-tablet-width);
+    max-width: var(--textbox-tablet-max-width);
+    transition: all ease-in-out 1.5s;
+  }
   .stripe-circle-elements,
-  .default-article,
+  .textbox,
   .square-elements {
     animation: roll-in-left 1.5s cubic-bezier(0.365, 0.56, 0.62, 1) both;
   }
@@ -219,7 +190,7 @@ nav {
 
 @media screen and (min-width: 900px) {
   .stripe-circle-elements,
-  .default-article,
+  .textbox,
   .square-elements {
     animation: scale-in-top 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) both;
   }
@@ -229,28 +200,26 @@ nav {
     padding-top: 100px;
     align-self: flex-start;
   }
-  .default-article {
+  .textbox {
     flex-grow: 1;
     margin: 20px;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--desktop-textbox-color);
     min-width: var(--textbox-width);
     max-width: var(--textbox-max-width);
-    transition: all linear 1.5s;
   }
   .stripe {
     height: var(--stripe-height);
   }
   .circle {
-    height: var(--circle-height);
-    width: var(--circle-width);
+    height: var(--circle-side-size);
+    width: var(--circle-side-size);
   }
   .main-section {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
     justify-content: space-between;
   }
-  .default-article,
+  .textbox,
   .stripe-circle-elements {
     transition: all linear 1.5s;
   }
