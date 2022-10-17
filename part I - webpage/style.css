@@ -232,6 +232,34 @@ body {
   }
 }
 
+@media screen and (max-height: 500px), screen and (max-width: 270px) {
+  .page-wrapper::after {
+    content: "Your screen is too small!";
+    font-size: 4em;
+    color: black;
+    animation: blink 1.5s infinite;
+  }
+
+  .main-section {
+    opacity: 0;
+    display: none;
+  }
+}
+
+@media (max-width: 580px) and (max-height: 633px) {
+  .page-wrapper::after {
+    content: "Your screen is too small!";
+    font-size: 4em;
+    color: black;
+    animation: blink 1.5s infinite;
+  }
+
+  .main-section {
+    opacity: 0;
+    display: none;
+  }
+}
+
 @keyframes slide-out-top {
   0% {
     transform: translateY(0);
@@ -273,5 +301,17 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes blink {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
   }
 }
