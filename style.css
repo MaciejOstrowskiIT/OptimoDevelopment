@@ -90,7 +90,7 @@ nav {
 .stripe-circle-elements,
 .default-article,
 .square-elements {
-  animation: scale-in-top 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+  animation: scale-in-top 1.5s cubic-bezier(0.265, 0.24, 0.74, 1) both;
 }
 
 .default-article {
@@ -205,14 +205,12 @@ nav {
     grid-area: circle;
     align-self: end;
     padding-bottom: 40px;
-    /* grid-template-columns: repeat(2, 130px);
-      grid-template-rows: repeat(2, 70px); */
   }
 
   .stripe-circle-elements,
   .default-article,
   .square-elements {
-    animation: roll-in-left 1.5s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+    animation: roll-in-left 1.5s cubic-bezier(0.365, 0.56, 0.62, 1) both;
   }
   .stripe {
     height: var(--stripe-tablet-height);
@@ -296,6 +294,15 @@ nav {
   }
   100% {
     transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes on-load {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
   }
 }
