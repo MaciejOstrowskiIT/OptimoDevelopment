@@ -1,0 +1,28 @@
+:root {
+  --page-background-color: #080;
+  --page-navbar-color: #880;
+
+  --desktop-textbox-color: #fff;
+  --tablet-textbox-color: #c83737;
+  --mobile-textbox-color: #00f;
+  --square-color: #f00;
+  --circle-color: #088;
+  --stripe-color: #00f;
+
+  --square-width: 120px;
+  --square-height: 120px;
+  --stripe-width: 135px;
+  --stripe-max-width: 175px;
+  --stripe-height: 30px;
+  --stripe-tablet-height: 25px;
+  --circle-width: 120px;
+  --circle-height: 110px;
+  --textbox-width: 245px;
+  --textbox-max-width: 315px;
+  --textbox-mobile-width: 200px;
+  --textbox-tablet-width: 240px;
+  --textbox-tablet-max-width: 310px;
+  --navbar-height: 50px;
+
+  --border-style-defined: 5px solid black;
+}
